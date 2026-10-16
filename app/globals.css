@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0a2f5c;
+  --navy-deep: #071f3d;
+  --blue: #1b4f8a;
+  --blue-mid: #2e6db5;
+  --steel: #5c6773;
+  --steel-mid: #8a96a3;
+  --mist: #e6ebf1;
+  --paper: #f4f7fa;
+  --white: #ffffff;
+  --ink: #12171d;
+  --whatsapp: #1f8a4c;
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-blue: var(--blue);
+  --color-blue-mid: var(--blue-mid);
+  --color-steel: var(--steel);
+  --color-steel-mid: var(--steel-mid);
+  --color-mist: var(--mist);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-whatsapp: var(--whatsapp);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue-mid);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 80;
+  background: var(--navy);
+  color: var(--white);
+  padding: 0.5rem 0.9rem;
+}
+
+.skip-link:focus {
+  top: 0.75rem;
+}
+
+.steel-grid {
+  background-color: var(--navy-deep);
+  background-image:
+    linear-gradient(180deg, rgba(10, 47, 92, 0.55), rgba(7, 31, 61, 0.92)),
+    linear-gradient(90deg, rgba(138, 150, 163, 0.12) 1px, transparent 1px),
+    linear-gradient(rgba(138, 150, 163, 0.12) 1px, transparent 1px);
+  background-size: auto, 28px 28px, 28px 28px;
 }
