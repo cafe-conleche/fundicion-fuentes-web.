@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/section-heading";
-import { WhatsappLink } from "@/components/whatsapp-link";
+import { ServiceRow } from "@/components/service-row";
 import { serviceWhatsappMessage, services, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -10,30 +10,23 @@ export const metadata: Metadata = {
 
 export default function ServiciosPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
+    <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 md:py-14">
       <SectionHeading
         as="h1"
         eyebrow="Oferta del taller"
         title="Servicios"
-        description="Listado de demostración. Cada servicio publicado incluye una consulta por WhatsApp que identifica el nombre seleccionado."
+        description="Cada servicio abre una consulta por WhatsApp con el nombre que usted eligió."
       />
 
-      <div className="mt-12 space-y-6">
-        {services.map((service) => (
-          <article
+      <div className="mt-8 space-y-6">
+        {services.map((service, index) => (
+          <ServiceRow
             key={service.slug}
-            className="grid gap-6 border border-mist bg-white p-6 md:grid-cols-[1fr_auto] md:items-end"
-          >
-            <div>
-              <h2 className="font-display text-2xl text-navy">{service.name}</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-steel">
-                {service.description}
-              </p>
-            </div>
-            <WhatsappLink message={serviceWhatsappMessage(service.name)}>
-              Consultar servicio
-            </WhatsappLink>
-          </article>
+            name={service.name}
+            description={service.description}
+            whatsappMessage={serviceWhatsappMessage(service.name)}
+            reverse={index % 2 === 1}
+          />
         ))}
       </div>
     </div>

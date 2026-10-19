@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ProductPlaceholder } from "@/components/product-placeholder";
+﻿import Link from "next/link";
+import { MediaSlot } from "@/components/media-slot";
 import { WhatsappLink } from "@/components/whatsapp-link";
 import {
   getCategory,
@@ -7,37 +7,68 @@ import {
   type Product,
 } from "@/lib/site";
 
-export function ProductCard({ product }: { product: Product }) {
+type ProductCardProps = {
+  product: Product;
+  variant?: "default" | "featured" | "compact";
+};
+
+export function ProductCard({ product, variant = "default" }: ProductCardProps) {
   const category = getCategory(product.category);
+  const isFeatured = variant === "featured";
+  const isCompact = variant === "compact";
 
   return (
-    <article className="flex h-full flex-col border border-mist bg-white">
-      <Link href={`/productos/${product.slug}`} className="block">
-        <ProductPlaceholder title={product.name} />
+    <article
+      className={`card flex flex-col ${isFeatured ? "lg:flex-row" : ""}`}
+    >
+      <Link
+        href={`/productos/${product.slug}`}
+        className={`block overflow-hidden ${isFeatured ? "lg:w-[55%] shrink-0" : ""}`}
+      >
+        <MediaSlot
+          variant="product"
+          label={product.name}
+          className={`transition-transform duration-300 hover:scale-105 ${
+            isFeatured ? "lg:min-h-full lg:aspect-auto lg:h-full" : ""
+          }`}
+        />
       </Link>
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div
+        className={`flex flex-1 flex-col gap-3 ${
+          isFeatured ? "justify-center p-6 sm:p-8 lg:p-10" : "p-5"
+        }`}
+      >
         {category ? (
-          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-steel">
+          <p className="eyebrow text-[0.68rem]">
             {category.name}
           </p>
         ) : null}
-        <h3 className="font-display text-xl text-navy">
-          <Link href={`/productos/${product.slug}`} className="hover:text-blue">
+        <h3
+          className={`font-display text-navy ${
+            isFeatured ? "text-2xl sm:text-3xl" : isCompact ? "text-lg" : "text-xl"
+          }`}
+        >
+          <Link
+            href={`/productos/${product.slug}`}
+            className="transition-colors hover:text-blue"
+          >
             {product.name}
           </Link>
         </h3>
-        <p className="flex-1 text-sm leading-6 text-steel">{product.description}</p>
-        <div className="flex flex-col gap-2 sm:flex-row">
+        {!isCompact ? (
+          <p className="flex-1 text-sm leading-6 text-steel">{product.description}</p>
+        ) : null}
+        <div className={`flex flex-col gap-2 ${isCompact ? "sm:flex-row" : "sm:flex-row"}`}>
           <Link
             href={`/productos/${product.slug}`}
-            className="inline-flex flex-1 items-center justify-center border border-mist px-4 py-2.5 text-sm font-semibold text-navy hover:bg-paper"
+            className="btn btn-outline flex-1 py-2 text-sm"
           >
             Ver ficha
           </Link>
           <WhatsappLink
             message={productWhatsappMessage(product.name)}
             variant="green"
-            className="flex-1"
+            className="flex-1 py-2 text-sm"
           >
             Consultar
           </WhatsappLink>

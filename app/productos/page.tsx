@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/section-heading";
-import { categories, products, productsByCategory, site } from "@/lib/site";
+import {
+  categories,
+  productsByCategory,
+  site,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Productos",
@@ -10,42 +14,41 @@ export const metadata: Metadata = {
 
 export default function ProductosPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
+    <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 md:py-14">
       <SectionHeading
         as="h1"
         eyebrow="Catálogo"
         title="Productos"
-        description={`Se muestran ${products.length} fichas de demostración, todas en estado publicado. Los productos desactivados no aparecerán en este listado cuando exista el panel administrativo.`}
+        description="Recorra las piezas por categoría. Cada ficha tiene foto y un botón para consultar por WhatsApp. No hay precios en el sitio."
       />
 
-      <nav className="mt-8 flex flex-wrap gap-2" aria-label="Categorías">
+      <nav className="mt-6 flex flex-wrap gap-2" aria-label="Categorías">
         {categories.map((category) => (
           <a
             key={category.slug}
             href={`#${category.slug}`}
-            className="border border-mist bg-white px-3 py-2 text-sm text-navy hover:border-steel-mid"
+            className="rounded-full border border-blue/30 bg-white px-4 py-2 text-sm font-semibold text-navy hover:border-navy hover:bg-navy hover:text-white"
           >
             {category.name}
           </a>
         ))}
       </nav>
 
-      <div className="mt-14 space-y-16">
-        {categories.map((category) => (
-          <section key={category.slug} id={category.slug} className="scroll-mt-28">
-            <h2 className="font-display text-2xl text-navy sm:text-3xl">
-              {category.name}
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-steel">
-              {category.description}
-            </p>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {productsByCategory(category.slug).map((product) => (
-                <ProductCard key={product.slug} product={product} />
-              ))}
-            </div>
-          </section>
-        ))}
+      <div className="mt-8 space-y-10">
+        {categories.map((category) => {
+          const items = productsByCategory(category.slug);
+          return (
+            <section key={category.slug} id={category.slug} className="scroll-mt-28">
+              <h2 className="font-display text-2xl text-navy sm:text-3xl">{category.name}</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-steel">{category.description}</p>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((product) => (
+                  <ProductCard key={product.slug} product={product} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 import { whatsappHref } from "@/lib/site";
 
 type WhatsappLinkProps = {
@@ -10,11 +10,11 @@ type WhatsappLinkProps = {
 
 const variants = {
   primary:
-    "inline-flex items-center justify-center gap-2 bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue",
+    "btn btn-primary",
   green:
-    "inline-flex items-center justify-center gap-2 bg-whatsapp px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#187341]",
+    "btn btn-whatsapp",
   ghost:
-    "inline-flex items-center justify-center gap-2 border border-mist bg-white px-5 py-3 text-sm font-semibold text-navy transition-colors hover:border-steel-mid hover:bg-paper",
+    "btn btn-outline",
 };
 
 export function WhatsappLink({

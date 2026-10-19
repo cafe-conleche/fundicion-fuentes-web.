@@ -2,92 +2,166 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandMark } from "@/components/brand-mark";
-import { nav, site } from "@/lib/site";
+import { SocialLinks } from "@/components/social-links";
+import {
+  contactFacts,
+  generalWhatsappMessage,
+  nav,
+  site,
+  whatsappHref,
+} from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const overSlider = pathname === "/" && !scrolled && !open;
+  const whatsapp = contactFacts().find((fact) => fact.id === "whatsapp");
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-mist bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-navy"
-          onClick={() => setOpen(false)}
-        >
-          <BrandMark className="h-10 w-10 shrink-0" />
-          <span className="leading-tight">
-            <span className="block font-display text-sm font-semibold uppercase tracking-[0.14em] sm:text-base">
-              {site.name}
-            </span>
-            <span className="block text-[0.7rem] text-steel">{site.location}</span>
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
-          {nav.map((item) => {
-            const current =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-3 py-2 text-sm font-medium transition-colors ${
-                  current ? "text-navy" : "text-steel hover:text-navy"
-                }`}
-                aria-current={current ? "page" : undefined}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-          <Link
-            href="/contacto"
-            className="ml-2 bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-blue"
-          >
-            Contactar
-          </Link>
-        </nav>
-
-        <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center border border-mist text-navy lg:hidden"
-          aria-expanded={open}
-          aria-controls="menu-movil"
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span className="sr-only">{open ? "Cerrar menú" : "Abrir menú"}</span>
-          <span className="flex flex-col gap-1.5" aria-hidden="true">
-            <span className="block h-0.5 w-5 bg-current" />
-            <span className="block h-0.5 w-5 bg-current" />
-            <span className="block h-0.5 w-5 bg-current" />
-          </span>
-        </button>
+    <div className="sticky top-0 z-40">
+      <div className="top-bar hidden h-11 md:block">
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
+          <p className="text-sm font-medium text-white">{site.location}</p>
+          <div className="flex items-center gap-3">
+            <SocialLinks variant="utility" />
+            <a
+              href={whatsappHref(generalWhatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-white hover:text-blue-light"
+            >
+              {whatsapp?.pending ? "WhatsApp" : whatsapp?.value}
+            </a>
+          </div>
+        </div>
       </div>
 
-      {open ? (
-        <nav
-          id="menu-movil"
-          className="border-t border-mist bg-white px-4 py-3 lg:hidden"
-          aria-label="Móvil"
-        >
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="block border-b border-mist py-3 text-base text-navy"
-              onClick={() => setOpen(false)}
-            >
-              {item.label}
+      <header
+        className={`h-[4.5rem] border-b transition-colors duration-300 ${
+          overSlider
+            ? "border-transparent bg-transparent text-white"
+            : "border-mist bg-white text-navy shadow-md"
+        }`}
+      >
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+          <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+            <BrandMark className="h-14 w-14 shrink-0" />
+            <span className="leading-tight">
+              <span
+                className={`block font-display text-lg font-bold uppercase tracking-[0.12em] sm:text-xl ${
+                  overSlider ? "text-white" : "text-navy"
+                }`}
+              >
+                {site.name}
+              </span>
+              <span className={`block text-xs font-medium ${overSlider ? "text-blue-light" : "text-steel"}`}>
+                {site.location}
+              </span>
+            </span>
+          </Link>
+
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
+            {nav.map((item) => {
+              const current = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`nav-link rounded-lg px-3 py-2 text-sm font-medium ${
+                    current
+                      ? overSlider
+                        ? "font-semibold text-white"
+                        : "font-semibold text-navy"
+                      : overSlider
+                        ? "text-white hover:text-blue-light"
+                        : "text-steel hover:text-navy"
+                  }`}
+                  aria-current={current ? "page" : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <Link href="/contacto" className="btn btn-primary ml-3 px-5 py-2 text-sm">
+              Contactar
             </Link>
-          ))}
-        </nav>
-      ) : null}
-    </header>
+          </nav>
+
+          <button
+            type="button"
+            className={`inline-flex h-11 w-11 items-center justify-center rounded-lg border lg:hidden ${
+              overSlider ? "border-white/50 text-white" : "border-mist text-navy"
+            }`}
+            aria-expanded={open}
+            aria-controls="menu-movil"
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span className="sr-only">{open ? "Cerrar menú" : "Abrir menú"}</span>
+            <span className="flex flex-col gap-[5px]" aria-hidden="true">
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${open ? "translate-y-[7px] rotate-45" : ""}`} />
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-opacity ${open ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-5 rounded-full bg-current transition-transform ${open ? "-translate-y-[7px] -rotate-45" : ""}`} />
+            </span>
+          </button>
+        </div>
+
+        {open ? (
+          <nav
+            id="menu-movil"
+            className="absolute inset-x-0 top-full border-t border-mist bg-white px-4 py-4 text-navy shadow-lg lg:hidden"
+            aria-label="Móvil"
+          >
+            <div className="mb-4 flex items-center justify-between gap-3 border-b border-mist pb-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-steel">Ubicación</p>
+                <p className="font-display text-2xl font-bold text-navy">{site.location}</p>
+              </div>
+              <SocialLinks variant="menu" />
+            </div>
+            <a
+              href={whatsappHref(generalWhatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mb-3 block font-display text-3xl font-bold text-blue"
+            >
+              {whatsapp?.pending ? "WhatsApp pendiente" : whatsapp?.value}
+            </a>
+            {nav.map((item) => {
+              const current = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`block rounded-lg px-2 py-3 text-base font-medium ${
+                    current ? "font-semibold text-navy" : "text-steel"
+                  }`}
+                  aria-current={current ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <Link href="/contacto" className="btn btn-primary mt-3 w-full" onClick={() => setOpen(false)}>
+              Contactar
+            </Link>
+          </nav>
+        ) : null}
+      </header>
+    </div>
   );
 }

@@ -1,47 +1,73 @@
-import Link from "next/link";
-import { nav, site } from "@/lib/site";
+﻿import Link from "next/link";
+import { CopyrightYear } from "@/components/copyright-year";
+import { SocialLinks } from "@/components/social-links";
+import { contactFacts, nav, site } from "@/lib/site";
 
 export function SiteFooter() {
+  const facts = contactFacts().filter((fact) => fact.id !== "whatsapp");
+
   return (
-    <footer className="mt-auto border-t border-mist bg-navy text-mist">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
+    <footer className="mt-auto bg-navy text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 md:py-12">
         <div>
-          <p className="font-display text-lg font-semibold uppercase tracking-[0.14em] text-white">
+          <p className="font-display text-2xl font-bold uppercase tracking-[0.12em]">
             {site.name}
           </p>
-          <p className="mt-3 max-w-xs text-sm leading-6 text-steel-mid">
-            Taller de fundición en {site.location}. Sitio institucional y catálogo
-            en construcción administrable.
-          </p>
+          <div className="accent-line mt-4" />
+          <p className="mt-4 max-w-xs text-base leading-7 text-blue-light">{site.tagline}</p>
         </div>
+
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-steel-mid">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-light">
             Navegación
           </p>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-4 space-y-2.5 text-base">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="text-white hover:text-mist">
+                <Link href={item.href} className="text-white hover:text-blue-light">
                   {item.label}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
+
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-steel-mid">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-light">
             Contacto
           </p>
-          <ul className="mt-3 space-y-2 text-sm text-white">
-            <li>{site.location}</li>
-            <li>WhatsApp: número oficial pendiente de confirmación</li>
-            <li>Dirección exacta y mapa: pendientes de autorización</li>
+          <ul className="mt-4 space-y-2.5 text-base">
+            {facts.map((fact) => (
+              <li key={fact.id}>
+                <span className="block text-xs uppercase tracking-[0.14em] text-blue-light">
+                  {fact.label}
+                </span>
+                <span className="text-white">{fact.value}</span>
+              </li>
+            ))}
+            <li>
+              <Link href="/contacto#cotizacion" className="font-semibold text-white hover:text-blue-light">
+                Formulario de cotización
+              </Link>
+            </li>
           </ul>
         </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-light">
+            Redes
+          </p>
+          <div className="mt-4">
+            <SocialLinks variant="footer" />
+          </div>
+        </div>
       </div>
-      <p className="border-t border-white/10 px-4 py-4 text-center text-xs text-steel-mid">
-        {site.name}. Contenido de demostración para validación del sitio público.
-      </p>
+
+      <div className="bg-navy-darker px-4 py-4 pb-24 text-sm text-blue-light sm:px-6 md:pb-4">
+        <p className="mx-auto max-w-6xl">
+          © <CopyrightYear /> {site.name}. {site.location}.
+        </p>
+      </div>
     </footer>
   );
 }

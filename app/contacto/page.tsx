@@ -1,53 +1,49 @@
 import type { Metadata } from "next";
-import { SectionHeading } from "@/components/section-heading";
+import { QuoteForm } from "@/components/quote-form";
 import { WhatsappLink } from "@/components/whatsapp-link";
-import { generalWhatsappMessage, site, whatsappNumber } from "@/lib/site";
+import { contactFacts, generalWhatsappMessage, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contacto",
-  description: `Contacto de ${site.name} en ${site.location}. WhatsApp y ubicación.`,
+  description: `Contacto y cotización de ${site.name} en ${site.location}.`,
 };
 
 export default function ContactoPage() {
+  const whatsapp = contactFacts().find((fact) => fact.id === "whatsapp");
+
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
-      <SectionHeading
-        as="h1"
-        eyebrow="Contacto"
-        title="Hable con el taller"
-        description="La vía comercial principal es WhatsApp. El número, el correo y la dirección exacta se publicarán cuando Fundición Fuentes los confirme."
-      />
-
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
-        <article className="border border-mist bg-white p-8">
-          <h2 className="font-display text-2xl text-navy">WhatsApp</h2>
-          <p className="mt-3 text-sm leading-6 text-steel">
-            Al pulsar el botón se abre WhatsApp con un mensaje preparado. El sitio
-            no afirma que la consulta haya sido recibida o guardada: solo abre la
-            conversación.
-          </p>
-          <p className="mt-3 text-sm text-steel">
-            Número oficial:{" "}
-            {whatsappNumber ? whatsappNumber : "pendiente de confirmación"}
-          </p>
-          <div className="mt-6">
-            <WhatsappLink message={generalWhatsappMessage}>
-              Cotizar una pieza
-            </WhatsappLink>
+    <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-10 sm:px-6 md:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <div>
+        <p className="eyebrow">Contacto</p>
+        <h1 className="mt-3 font-display text-4xl font-semibold text-navy sm:text-5xl">
+          Hable con el taller
+        </h1>
+        <p className="mt-4 max-w-xl text-base leading-7 text-steel">
+          El número y el horario están aquí. La cotización se arma en el formulario y se envía por WhatsApp.
+        </p>
+        <dl className="mt-8 grid max-w-md grid-cols-2 gap-6">
+          <div className="min-w-0">
+            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-steel">Número</dt>
+            <dd className="mt-2 font-display text-2xl font-bold leading-tight text-navy">
+              {whatsapp?.pending ? "Pendiente" : whatsapp?.value}
+            </dd>
           </div>
-        </article>
-
-        <article className="border border-mist bg-white p-8">
-          <h2 className="font-display text-2xl text-navy">Ubicación</h2>
-          <p className="mt-3 text-sm leading-6 text-steel">
-            {site.location}. La dirección exacta y el mapa se mostrarán cuando
-            existan autorización y coordenadas confirmadas. No se publica una
-            ubicación provisional.
-          </p>
-          <div className="mt-6 flex min-h-48 items-center justify-center border border-dashed border-steel-mid bg-paper text-center text-sm text-steel">
-            Mapa pendiente de confirmación de dirección
+          <div className="min-w-0">
+            <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-steel">Horario</dt>
+            <dd className="mt-2 font-display text-2xl font-bold leading-tight text-navy">Pendiente</dd>
           </div>
-        </article>
+        </dl>
+        <WhatsappLink message={generalWhatsappMessage} variant="green" className="mt-6 w-fit">
+          Abrir WhatsApp
+        </WhatsappLink>
+      </div>
+
+      <div id="cotizacion" className="scroll-mt-28 rounded-2xl border border-mist bg-white p-6 shadow-md sm:p-8">
+        <h2 className="font-display text-3xl text-navy">Formulario de cotización</h2>
+        <p className="mt-3 text-sm leading-6 text-steel">
+          Complete los datos. Al enviar se abre WhatsApp con el mensaje listo. El sitio no lo guarda.
+        </p>
+        <QuoteForm />
       </div>
     </div>
   );

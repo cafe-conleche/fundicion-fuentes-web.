@@ -1,54 +1,81 @@
 import type { Metadata } from "next";
-import { SectionHeading } from "@/components/section-heading";
-import { WhatsappLink } from "@/components/whatsapp-link";
-import { generalWhatsappMessage, site } from "@/lib/site";
+import Link from "next/link";
+import { MediaSlot } from "@/components/media-slot";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Nosotros",
   description: `Presentación institucional de ${site.name}, taller de fundición en ${site.location}.`,
 };
 
+const points = [
+  {
+    title: "El oficio",
+    text: "Piezas fundidas y servicios del taller para trabajo industrial, con un interlocutor en Masaya.",
+  },
+  {
+    title: "El catálogo",
+    text: "Las piezas se recorren por categoría. Cada ficha abre una consulta, sin precios publicados.",
+    href: "/productos",
+    action: "Ver productos",
+  },
+  {
+    title: "La cotización",
+    text: "El formulario de contacto arma el mensaje con su nombre, teléfono y el trabajo que necesita.",
+    href: "/contacto#cotizacion",
+    action: "Pedir cotización",
+  },
+];
+
 export default function NosotrosPage() {
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
-      <SectionHeading
-        as="h1"
-        eyebrow="Institucional"
-        title={site.name}
-        description={`Taller de fundición con sede en ${site.location}. Esta página reúne la presentación de la empresa. Historia, fotografías de instalaciones y textos de trayectoria se publicarán cuando el cliente los entregue validados.`}
-      />
-
-      <div className="mt-12 grid gap-8 lg:grid-cols-2">
-        <article className="border border-mist bg-white p-8">
-          <h2 className="font-display text-2xl text-navy">Actividad</h2>
-          <p className="mt-4 text-base leading-7 text-steel">
-            El taller trabaja piezas de fundición y servicios asociados para
-            quienes necesitan un interlocutor local. El sitio permite conocer la
-            oferta, recorrer el catálogo por categorías y abrir una consulta
-            comercial por WhatsApp.
+    <>
+      <section className="bg-navy text-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 md:py-14">
+          <p className="eyebrow text-blue-light">El taller</p>
+          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold sm:text-5xl">
+            {site.name}
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-8 text-blue-light">
+            Taller de fundición en {site.location}. {site.tagline}
           </p>
-          <p className="mt-4 text-base leading-7 text-steel">
-            No se describen aquí procesos, capacidades ni materiales que el taller
-            no haya confirmado. Lo que aparece como demostración está marcado
-            como tal.
-          </p>
-        </article>
-        <article className="steel-grid p-8 text-white">
-          <h2 className="font-display text-2xl">Pendiente de validación</h2>
-          <ul className="mt-4 space-y-3 text-sm leading-6 text-mist">
-            <li>Historia y años de trayectoria</li>
-            <li>Fotografías oficiales del taller</li>
-            <li>Valores y compromiso de calidad, con redacción del cliente</li>
-            <li>Identidad visual definitiva (logotipo original)</li>
-          </ul>
-        </article>
-      </div>
+        </div>
+      </section>
 
-      <div className="mt-10">
-        <WhatsappLink message={generalWhatsappMessage}>
-          Hablar con el taller
-        </WhatsappLink>
-      </div>
-    </div>
+      <section className="mx-auto grid w-full max-w-6xl items-center gap-8 px-4 py-10 sm:px-6 md:py-14 lg:grid-cols-2">
+        <MediaSlot
+          variant="banner"
+          label="Instalaciones del taller en Masaya"
+          className="min-h-64 rounded-2xl"
+        />
+        <div>
+          <h2 className="font-display text-3xl font-semibold text-navy">Qué hace el taller</h2>
+          <p className="mt-4 text-base leading-7 text-steel">
+            Fabricamos piezas y atendemos servicios para quien necesita un interlocutor local:
+            recorrer el catálogo y pedir una cotización.
+          </p>
+          <p className="mt-3 text-base leading-7 text-steel">
+            La historia, las fotos del equipo y los textos de trayectoria se publicarán cuando
+            el taller los entregue. Esta página no afirma capacidades que aún no están confirmadas.
+          </p>
+        </div>
+      </section>
+
+      <section className="border-t border-mist bg-white">
+        <div className="mx-auto grid w-full max-w-6xl gap-4 px-4 py-10 sm:grid-cols-3 sm:px-6 md:py-12">
+          {points.map((point) => (
+            <article key={point.title} className="rounded-2xl border border-mist bg-paper p-6">
+              <h2 className="font-display text-2xl text-navy">{point.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-steel">{point.text}</p>
+              {point.href ? (
+                <Link href={point.href} className="mt-4 inline-block text-sm font-semibold text-blue hover:text-navy">
+                  {point.action}
+                </Link>
+              ) : null}
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

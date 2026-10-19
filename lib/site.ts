@@ -11,12 +11,65 @@ export const site = {
 /** Vacío hasta que el taller confirme el número oficial. */
 export const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
 
+export type ContactFact = {
+  id: "ubicacion" | "whatsapp" | "horario" | "direccion";
+  label: string;
+  value: string;
+  pending: boolean;
+  emphasis?: boolean;
+};
+
+/** Solo datos presentes en el sitio. Horario y dirección aún no están confirmados. */
+export function contactFacts(): ContactFact[] {
+  const hasWhatsapp = whatsappNumber.trim().length > 0;
+  return [
+    {
+      id: "ubicacion",
+      label: "Ubicación",
+      value: site.location,
+      pending: false,
+    },
+    {
+      id: "whatsapp",
+      label: "WhatsApp",
+      value: hasWhatsapp ? whatsappNumber : "Pendiente",
+      pending: !hasWhatsapp,
+      emphasis: true,
+    },
+    {
+      id: "horario",
+      label: "Horario",
+      value: "Pendiente",
+      pending: true,
+    },
+    {
+      id: "direccion",
+      label: "Dirección",
+      value: "Pendiente",
+      pending: true,
+    },
+  ];
+}
+
 export const nav = [
   { href: "/", label: "Inicio" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/productos", label: "Productos" },
   { href: "/servicios", label: "Servicios" },
   { href: "/contacto", label: "Contacto" },
+] as const;
+
+/**
+ * Iconos de redes. Los href de plataforma son provisionales hasta que el taller
+ * entregue el perfil real. WhatsApp usa el enlace de conversación del sitio.
+ */
+export const socialLinks = [
+  { name: "Facebook", href: "https://facebook.com", label: "Facebook de Fundición Fuentes" },
+  { name: "Instagram", href: "https://instagram.com", label: "Instagram de Fundición Fuentes" },
+  { name: "WhatsApp", href: "https://wa.me/", label: "WhatsApp de Fundición Fuentes" },
+  { name: "YouTube", href: "https://youtube.com", label: "YouTube de Fundición Fuentes" },
+  { name: "TikTok", href: "https://tiktok.com", label: "TikTok de Fundición Fuentes" },
+  { name: "X", href: "https://x.com", label: "X de Fundición Fuentes" },
 ] as const;
 
 export const categories = [

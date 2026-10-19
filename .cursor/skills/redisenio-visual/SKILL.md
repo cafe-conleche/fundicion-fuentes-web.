@@ -31,7 +31,7 @@ Usar los tokens de `app/globals.css`. No introducir otra familia de color.
 
 Display: Barlow Semi Condensed. Cuerpo: Source Sans 3. Inter solo si ya está en un control existente; no añadir una cuarta familia.
 
-Escala vertical entre bloques: 64px móvil, 96px escritorio. Un bloque full-bleed (slider, franja de datos, CTA o footer) alternado con un bloque contenido. Radio máximo 16px en tarjetas; el slider va a sangre, sin marco.
+Escala vertical entre bloques: 40px móvil, 56px escritorio. Un bloque full-bleed (slider, franja de datos, CTA o footer) alternado con un bloque contenido. Radio máximo 16px en tarjetas; el slider va a sangre, sin marco. El muestrario y el catálogo usan tarjetas del mismo tamaño, en rejilla. Las categorías de Productos van en una fila de pastillas bajo el título, no en una columna lateral.
 
 ## Header
 
@@ -73,9 +73,10 @@ Copy visible al público: español claro, sin “demo”, “wireframe”, “sl
 
 Tratarlo como cierre institucional, no como tres listas.
 
-1. **Banda de números** (navy profundo, borde superior azul claro): los mismos datos de la franja de inicio, repetidos más grandes. Teléfono o WhatsApp es el elemento más grande de la banda.
-2. **Cuerpo en cuatro zonas** sobre navy: marca y una frase; navegación; contacto (ubicación, horario, dirección); redes en botones circulares blancos de 44px con el glifo de la red, `aria-label` y `target="_blank"`.
+1. Sin banda de números encima del footer.
+2. **Cuerpo en cuatro zonas** sobre navy: marca y una frase; navegación; contacto (ubicación, horario, dirección y enlace al formulario); todas las redes en botones circulares blancos de 44px con el glifo de la red, `aria-label` y `target="_blank"`.
 3. **Barra legal** más oscura: copyright y una línea. Sin párrafo de “contenido de demostración” si el banner superior ya lo dice.
+4. El botón flotante de WhatsApp usa el glifo oficial, es circular y crece al pasar el cursor.
 
 Enlaces de redes salen de datos del sitio. Hasta que existan URLs reales, los iconos apuntan a los href ya definidos y no se inventan perfiles.
 
