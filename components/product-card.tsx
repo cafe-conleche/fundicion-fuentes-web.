@@ -9,33 +9,39 @@ import {
 
 type ProductCardProps = {
   product: Product;
-  variant?: "default" | "featured" | "compact";
+  variant?: "default" | "featured" | "compact" | "row";
 };
 
 export function ProductCard({ product, variant = "default" }: ProductCardProps) {
   const category = getCategory(product.category);
   const isFeatured = variant === "featured";
   const isCompact = variant === "compact";
+  const isRow = variant === "row";
 
   return (
     <article
-      className={`card flex flex-col ${isFeatured ? "lg:flex-row" : ""}`}
+      className={`card flex flex-col ${
+        isFeatured ? "lg:flex-row" : ""
+      } ${isRow ? "sm:flex-row" : ""}`}
     >
       <Link
         href={`/productos/${product.slug}`}
-        className={`block overflow-hidden ${isFeatured ? "lg:w-[55%] shrink-0" : ""}`}
+        className={`block overflow-hidden ${
+          isFeatured ? "lg:w-[55%] shrink-0" : ""
+        } ${isRow ? "sm:w-[42%] sm:max-w-xs shrink-0" : ""}`}
       >
         <MediaSlot
-          variant="product"
+          variant={isRow ? "catalog" : "product"}
           label={product.name}
+          quiet={isRow}
           className={`transition-transform duration-300 hover:scale-105 ${
             isFeatured ? "lg:min-h-full lg:aspect-auto lg:h-full" : ""
-          }`}
+          } ${isRow ? "sm:h-full" : ""}`}
         />
       </Link>
       <div
         className={`flex flex-1 flex-col gap-3 ${
-          isFeatured ? "justify-center p-6 sm:p-8 lg:p-10" : "p-5"
+          isFeatured ? "justify-center p-6 sm:p-8 lg:p-10" : isRow ? "justify-center p-5 sm:p-6" : "p-5"
         }`}
       >
         {category ? (
@@ -45,7 +51,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         ) : null}
         <h3
           className={`font-display text-navy ${
-            isFeatured ? "text-2xl sm:text-3xl" : isCompact ? "text-lg" : "text-xl"
+            isFeatured ? "text-2xl sm:text-3xl" : isRow ? "text-2xl" : isCompact ? "text-lg" : "text-xl"
           }`}
         >
           <Link

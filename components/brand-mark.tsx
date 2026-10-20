@@ -7,7 +7,8 @@ export function BrandMark({ className }: { className?: string }) {
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <rect width="64" height="64" rx="6" fill="#0A2F5C" />
+      <rect width="64" height="64" rx="6" fill="#1e3a8a" />
+      <rect x="14" y="52" width="14" height="3" rx="1.5" fill="#EE1C24" />
       <path fill="#F4F7FA" d="M11 15h16.8v6.2H19.2v6.4h7.6v5.8h-7.6V49H11V15Z" />
       <path fill="#8A96A3" d="M36.2 15H53v6.2h-8.6v6.4h7.4v5.8h-7.4V49h-8.2V15Z" />
     </svg>

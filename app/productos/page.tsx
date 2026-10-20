@@ -41,9 +41,9 @@ export default function ProductosPage() {
             <section key={category.slug} id={category.slug} className="scroll-mt-28">
               <h2 className="font-display text-2xl text-navy sm:text-3xl">{category.name}</h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-steel">{category.description}</p>
-              <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-5 flex flex-col gap-4">
                 {items.map((product) => (
-                  <ProductCard key={product.slug} product={product} />
+                  <ProductCard key={product.slug} product={product} variant="row" />
                 ))}
               </div>
             </section>

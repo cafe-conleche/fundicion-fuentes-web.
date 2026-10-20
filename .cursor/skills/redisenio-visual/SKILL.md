@@ -18,7 +18,7 @@ No inventar años de experiencia, piezas fabricadas, certificaciones, horarios, 
 
 ## Paleta y tipo
 
-Usar los tokens de `app/globals.css`. No introducir otra familia de color.
+Usar los tokens de `app/globals.css`. El único color extra del logo es el rojo de fundición.
 
 | Rol | Token | Uso |
 |---|---|---|
@@ -28,6 +28,7 @@ Usar los tokens de `app/globals.css`. No introducir otra familia de color.
 | Papel | `--paper` `#f8faff` | Fondos de lectura |
 | Acero / niebla | `--steel`, `--mist` | Cuerpo secundario y bordes |
 | WhatsApp | `--whatsapp` | Solo CTA de conversación |
+| Rojo fundición | `--ember` `#EE1C24` | Marca del menú activo y un trazo corto en el monograma. No en filetes de sección, números grandes ni fondos |
 
 Display: Barlow Semi Condensed. Cuerpo: Source Sans 3. Inter solo si ya está en un control existente; no añadir una cuarta familia.
 
@@ -60,8 +61,8 @@ No usar rejilla CSS como sustituto de la foto. Si no hay imagen, `MediaSlot` ocu
 
 Orden fijo. No volver al patrón “todas las secciones iguales”.
 
-1. **Franja de datos** (blanco, solapada unos 32px sobre el slider en escritorio): tres o cuatro cifras o datos en azul grande — ubicación, WhatsApp, horario, dirección — con etiqueta pequeña debajo. Es la información básica de la empresa, visible sin scroll largo.
-2. **La empresa:** split 45/55. Foto o slot a un lado; al otro, eyebrow, título que diga qué hace el taller, dos frases y enlace a `/nosotros`. En móvil la imagen va arriba.
+1. **Sin franja de datos** sobre el slider. Ubicación, WhatsApp, horario y dirección viven en el footer y en contacto, no en una barra blanca entre el slider y la empresa.
+2. **La empresa:** fondo blanco, distinto del slider navy. Título navy a la izquierda y `WorkshopFilm` a la derecha. Sin filete rojo, sin rejilla numerada ni líneas entre servicios.
 3. **Categorías:** paneles altos con imagen, no pills. Cuatro columnas en escritorio; en móvil, carrusel de un panel.
 4. **Muestrario:** una pieza grande y dos compactas, como ahora, con más aire y un título que hable al visitante (“Piezas que fabricamos”), no al equipo (“Composición de catálogo”).
 5. **Servicios:** dos filas como máximo en inicio; el resto vive en `/servicios`.
@@ -84,8 +85,8 @@ Enlaces de redes salen de datos del sitio. Hasta que existan URLs reales, los ic
 
 Misma cabecera, franja no hace falta, footer idéntico.
 
-- `/nosotros`: foto ancha y texto en columna legible; no dos tarjetas genéricas.
-- `/productos` y ficha: fondo claro, imagen protagonista, CTA de WhatsApp. Sin precios.
+- `/nosotros`: apertura navy con el mismo `WorkshopFilm`. Debajo, tres bloques alineados (número + título a la izquierda, contenido a la derecha): oficio, cómo encargar, servicios. Sin índice «En esta página».
+- `/productos`: pastillas de categoría y, dentro de cada una, filas horizontales (imagen a la izquierda, nombre, texto y botones a la derecha). La ficha sigue con imagen protagonista y CTA de WhatsApp. Sin precios.
 - `/servicios`: filas imagen + texto, alternando lado.
 - `/contacto`: datos grandes (los del footer) y formulario o bloque de WhatsApp al lado.
 

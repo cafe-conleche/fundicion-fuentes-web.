@@ -1,8 +1,10 @@
 type MediaSlotProps = {
   /** Qué debería mostrarse cuando el taller entregue la foto. */
   label: string;
-  variant?: "hero" | "category" | "product" | "service" | "banner";
+  variant?: "hero" | "category" | "product" | "service" | "banner" | "catalog";
   className?: string;
+  /** Oculta el pie del recuadro cuando el padre ya muestra la leyenda. */
+  quiet?: boolean;
 };
 
 const aspect: Record<NonNullable<MediaSlotProps["variant"]>, string> = {
@@ -11,12 +13,14 @@ const aspect: Record<NonNullable<MediaSlotProps["variant"]>, string> = {
   product: "aspect-[3/4] w-full",
   service: "aspect-[16/10] w-full md:aspect-auto md:min-h-[12rem]",
   banner: "aspect-[21/9] w-full min-h-[10rem]",
+  catalog: "aspect-[16/10] h-full min-h-[11rem] w-full sm:aspect-auto",
 };
 
 export function MediaSlot({
   label,
   variant = "product",
   className = "",
+  quiet = false,
 }: MediaSlotProps) {
   return (
     <div
@@ -35,9 +39,11 @@ export function MediaSlot({
           Foto del taller pendiente
         </span>
       </div>
-      <p className="absolute bottom-4 left-4 right-4 text-sm leading-snug text-white/90">
-        {label}
-      </p>
+      {quiet ? null : (
+        <p className="absolute bottom-4 left-4 right-4 text-sm leading-snug text-white/90">
+          {label}
+        </p>
+      )}
     </div>
   );
 }

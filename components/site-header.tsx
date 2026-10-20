@@ -147,7 +147,7 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   className={`block rounded-lg px-2 py-3 text-base font-medium ${
-                    current ? "font-semibold text-navy" : "text-steel"
+                    current ? "border-l-2 border-ember pl-3 font-semibold text-navy" : "text-steel"
                   }`}
                   aria-current={current ? "page" : undefined}
                   onClick={() => setOpen(false)}

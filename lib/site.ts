@@ -230,3 +230,9 @@ export function serviceWhatsappMessage(name: string) {
 
 export const generalWhatsappMessage =
   "Hola, deseo cotizar una pieza con Fundición Fuentes.";
+
+/**
+ * Video del taller (mp4, webm, YouTube o Vimeo).
+ * Vacío hasta que lo entreguen. Se puede definir con NEXT_PUBLIC_WORKSHOP_VIDEO.
+ */
+export const workshopVideoSrc = process.env.NEXT_PUBLIC_WORKSHOP_VIDEO ?? "";

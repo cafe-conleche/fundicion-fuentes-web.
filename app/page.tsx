@@ -1,9 +1,8 @@
 ﻿import Link from "next/link";
 import { CategoryPanel } from "@/components/category-panel";
-import { ContactFacts } from "@/components/contact-facts";
 import { HeroSlider } from "@/components/hero-slider";
-import { MediaSlot } from "@/components/media-slot";
 import { ProductCard } from "@/components/product-card";
+import { WorkshopFilm } from "@/components/workshop-film";
 import { SectionHeading } from "@/components/section-heading";
 import { ServiceRow } from "@/components/service-row";
 import { WhatsappLink } from "@/components/whatsapp-link";
@@ -14,6 +13,7 @@ import {
   serviceWhatsappMessage,
   services,
   whatsappNumber,
+  workshopVideoSrc,
 } from "@/lib/site";
 
 export default function Home() {
@@ -23,33 +23,37 @@ export default function Home() {
     <>
       <HeroSlider />
 
-      <section className="relative z-20 -mt-8">
-        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
-          <div className="rounded-2xl border border-mist bg-white px-6 py-8 shadow-lg sm:px-8">
-            <ContactFacts />
-          </div>
+      <section className="relative overflow-hidden bg-white text-ink">
+        <div
+          className="pointer-events-none absolute -left-16 top-8 font-display text-[22vw] font-bold leading-none text-navy/[0.05] sm:text-[14rem]"
+          aria-hidden="true"
+        >
+          FF
         </div>
-      </section>
-
-      <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 md:py-14">
-        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1fr)]">
-          <MediaSlot
-            variant="banner"
-            label="Fachada o interior del taller"
-            className="rounded-2xl"
+        <div className="relative mx-auto grid w-full max-w-6xl items-end gap-8 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-12 lg:gap-6">
+          <div className="min-w-0 lg:col-span-5 lg:pb-6">
+            <p className="eyebrow">La empresa</p>
+            <h2 className="mt-4 font-display text-4xl font-bold leading-[0.95] text-navy sm:text-5xl lg:text-6xl">
+              El metal toma forma en Masaya.
+            </h2>
+            <p className="mt-5 max-w-md text-base leading-7 text-steel">
+              Fundición Fuentes fabrica piezas fundidas y atiende los servicios del
+              taller. El catálogo muestra el tipo de trabajo; la cotización se
+              conversa por WhatsApp.
+            </p>
+            <Link
+              href="/nosotros"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy underline decoration-navy/30 underline-offset-4 hover:text-blue"
+            >
+              Ver cómo trabaja el taller
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <WorkshopFilm
+            src={workshopVideoSrc}
+            label="Recorrido del taller, colada o pieza en proceso"
+            className="min-w-0 lg:col-span-7 lg:translate-y-4 [&_figcaption]:text-steel"
           />
-          <div>
-            <SectionHeading
-              eyebrow="La empresa"
-              title="Fundición de metales para trabajo industrial"
-              description="En Masaya el taller fabrica piezas fundidas y atiende servicios asociados. El catálogo muestra el tipo de trabajo; la cotización se conversa por WhatsApp."
-            />
-          </div>
-        </div>
-        <div className="mt-8 flex justify-center">
-          <Link href="/nosotros" className="btn btn-primary px-8 py-3 text-base">
-            Conocer el taller
-          </Link>
         </div>
       </section>
 
