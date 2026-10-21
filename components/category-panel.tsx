@@ -1,27 +1,44 @@
 ﻿import Link from "next/link";
+import Image from "next/image"; // <-- Importamos Image
 import { MediaSlot } from "@/components/media-slot";
 
 type CategoryPanelProps = {
   slug: string;
   name: string;
   description: string;
+  imageSrc?: string; // <-- Nueva propiedad opcional
 };
 
-export function CategoryPanel({ slug, name, description }: CategoryPanelProps) {
+export function CategoryPanel({ slug, name, description, imageSrc }: CategoryPanelProps) {
   return (
     <Link
       href={`/productos#${slug}`}
       className="group relative block overflow-hidden rounded-xl border border-mist bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-light hover:shadow-lg"
     >
-      <MediaSlot
-        variant="category"
-        label={`Piezas de ${name.toLowerCase()} — material del taller`}
-        className="transition-transform duration-500 group-hover:scale-105"
-      />
+      {/* Si hay imagen, la mostramos. Si no, mostramos el MediaSlot azul */}
+      {imageSrc ? (
+        <div className="relative h-64 w-full overflow-hidden sm:h-72">
+          <Image
+            src={imageSrc}
+            alt={`Piezas de ${name.toLowerCase()}`}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+      ) : (
+        <MediaSlot
+          variant="category"
+          label={`Piezas de ${name.toLowerCase()} — material del taller`}
+          className="transition-transform duration-500 group-hover:scale-105"
+        />
+      )}
+      
+      {/* El degradado oscuro para que el texto se lea bien */}
       <div
         className="absolute inset-0 bg-gradient-to-t from-navy-deep/95 via-navy-deep/40 to-transparent transition-opacity duration-300 group-hover:from-navy/90"
         aria-hidden="true"
       />
+      
       <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
         <p className="eyebrow text-[0.6rem] text-blue-light/80">
           Categoría

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { WorkshopFilm } from "@/components/workshop-film";
-import { services, site, workshopVideoSrc } from "@/lib/site";
+// CAMBIO 1: Importamos el nuevo video
+import { services, site, nosotrosVideoSrc } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -51,7 +52,7 @@ export default function NosotrosPage() {
             </p>
           </div>
           <WorkshopFilm
-            src={workshopVideoSrc}
+            src={nosotrosVideoSrc} // CAMBIO 2: Usamos el video de elaboración
             label="Video institucional: instalaciones, equipo o una colada"
             className="min-w-0 lg:col-span-7 [&_figcaption]:text-blue-light/80"
           />

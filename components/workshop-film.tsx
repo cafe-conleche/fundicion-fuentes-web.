@@ -50,12 +50,28 @@ export function WorkshopFilm({ src, label, className = "" }: WorkshopFilmProps) 
 
         {film?.kind === "file" ? (
           <video
-            className="aspect-video w-full bg-navy-darker object-cover"
+            className="w-full h-[400px] bg-navy-darker object-cover object-[center_20%]"
             controls
+            // 1. Quitamos la opción de volumen y descarga de los controles
+            controlsList="nodownload noplaybackrate noremoteplayback novolume" 
+            onContextMenu={(e) => e.preventDefault()}
             playsInline
-            preload="metadata"
+            // 2. Esto es clave: el video se renderiza directamente silenciado
+            muted 
+            autoPlay // Opcional: hace que empiece solo
+            loop // Opcional: hace que se repita
+            preload="auto"
+            // 3. Forzamos el silencio en cuanto se carga
+            ref={(videoElement) => {
+              if (videoElement) {
+                videoElement.muted = true;
+                videoElement.volume = 0;
+                // Este truco fuerza al navegador a aceptar el silencio
+                videoElement.setAttribute('muted', '');
+              }
+            }}
           >
-            <source src={film.src} />
+            <source src={film.src} type="video/mp4" />
             Su navegador no reproduce este video.
           </video>
         ) : null}

@@ -74,6 +74,15 @@ export default function Home() {
                   slug={category.slug}
                   name={category.name}
                   description={category.description}
+                  imageSrc={
+                    category.slug === "piezas-industriales"
+                      ? "/images/Discos3.jpeg"
+                      : category.slug === "metalmecanica"
+                      ? "/images/CirculoNegro.jpeg"
+                      : category.slug === "alcantarillado-urbano"
+                      ? "/images/Rejilla2.jpeg"
+                      : "/images/DiscosGYM8.jpeg"
+                  }
                 />
               </div>
             ))}

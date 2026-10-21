@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { MediaSlot } from "@/components/media-slot";
 import { WhatsappLink } from "@/components/whatsapp-link";
@@ -8,8 +9,8 @@ import { generalWhatsappMessage, site } from "@/lib/site";
 
 const slides = [
   {
-    id: "taller",
-    imageLabel: "Vista del taller o una pieza grande",
+    id: "taller-equipo",
+    image: "/images/EmpleadosTodos2.jpeg",
     eyebrow: `Taller de fundición · ${site.location}`,
     title: "Piezas fundidas en Masaya",
     text: "Fundición Fuentes fabrica piezas y atiende trabajos industriales. Esta es la puerta de entrada al taller, al catálogo y a la cotización.",
@@ -17,22 +18,49 @@ const slides = [
     primaryLabel: "Conocer el taller",
   },
   {
-    id: "catalogo",
-    imageLabel: "Pieza del catálogo",
-    eyebrow: "Catálogo",
-    title: "Vea el tipo de pieza que necesita",
-    text: "Industriales, metalmecánica, componentes urbanos y trabajos a medida. Elija una categoría y abra la ficha.",
+    id: "fundicion",
+    image: "/images/Fundicion.jpeg",
+    eyebrow: "Proceso de fundición",
+    title: "Tradición y fuerza del hierro",
+    text: "Nuestro proceso de fundición garantiza piezas resistentes y de alta calidad para la industria.",
+    primaryHref: "/servicios",
+    primaryLabel: "Ver servicios",
+  },
+  {
+    id: "maquina",
+    image: "/images/PinachoMaquina.jpeg",
+    eyebrow: "Tecnología",
+    title: "Precisión en cada pieza",
+    text: "Contamos con maquinaria especializada para garantizar acabados exactos en cada trabajo.",
     primaryHref: "/productos",
     primaryLabel: "Ver productos",
   },
   {
-    id: "cotizar",
-    imageLabel: "Oficio del taller o plano de una pieza",
-    eyebrow: "Cotización",
-    title: "¿Tiene un plano o una pieza?",
-    text: "Cuéntenos qué necesita. La conversación de cotización se abre por WhatsApp.",
+    id: "pieza-arena",
+    image: "/images/PiezaArena3.jpeg",
+    eyebrow: "Moldeo",
+    title: "Artesanía y detalle",
+    text: "El moldeo en arena es una de nuestras especialidades, creando formas únicas con precisión.",
     primaryHref: "/contacto",
-    primaryLabel: "Ir a contacto",
+    primaryLabel: "Cotizar pieza",
+  },
+  {
+    id: "elaboracion",
+    image: "/images/ElaboracionMaquina.jpeg",
+    eyebrow: "Maquinado",
+    title: "Elaboración de componentes",
+    text: "Transformamos el metal en componentes funcionales para maquinaria y equipo industrial.",
+    primaryHref: "/servicios",
+    primaryLabel: "Conocer más",
+  },
+  {
+    id: "pieza-detalle",
+    image: "/images/Pieza9.jpeg",
+    eyebrow: "Catálogo",
+    title: "Piezas a medida",
+    text: "Cada pieza cuenta una historia de precisión. Descubra nuestro catálogo de trabajos realizados.",
+    primaryHref: "/productos",
+    primaryLabel: "Explorar catálogo",
   },
 ] as const;
 
@@ -59,7 +87,7 @@ export function HeroSlider() {
     if (reduceMotion || paused) return;
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % slides.length);
-    }, 6000);
+    }, 5000); // <-- CAMBIADO A 5 SEGUNDOS (5000 ms) para que se vean bien las fotos
     return () => window.clearInterval(timer);
   }, [paused, reduceMotion]);
 
@@ -95,11 +123,15 @@ export function HeroSlider() {
             aria-hidden={!active}
             inert={!active}
           >
-            <MediaSlot
-              variant="hero"
-              label={slide.imageLabel}
-              className="!absolute inset-0 h-full !min-h-0 w-full"
+            {/* RENDERIZADO DE LA IMAGEN */}
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              fill
+              className="object-cover"
+              priority={slideIndex === 0} // Solo la primera carga rápido
             />
+            
             <div className="absolute inset-0 hero-overlay" aria-hidden="true" />
             <div className="absolute inset-0 flex items-end">
               <div className="mx-auto w-full max-w-6xl px-12 pb-16 pt-24 sm:px-14 md:px-16 md:pb-28 md:pt-28">

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BrandMark } from "@/components/brand-mark";
 import { SocialLinks } from "@/components/social-links";
 import {
   contactFacts,
@@ -57,9 +57,20 @@ export function SiteHeader() {
             : "border-mist bg-white text-navy shadow-md"
         }`}
       >
+        {/* Volvemos a centrar el contenido con max-w-6xl */}
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+          
           <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-            <BrandMark className="h-14 w-14 shrink-0" />
+            {/* Logo con h-16 para que resalte, y levemente más grande */}
+            <Image
+              src="/images/logo-taller.png"
+              alt="Fundición Fuentes Logo"
+              width={200} 
+              height={60}
+              className="h-16 w-auto object-contain" 
+              priority 
+            />
+            
             <span className="leading-tight">
               <span
                 className={`block font-display text-[0.8rem] font-bold uppercase leading-none tracking-normal min-[400px]:text-lg min-[400px]:tracking-[0.08em] sm:text-xl sm:tracking-[0.12em] ${

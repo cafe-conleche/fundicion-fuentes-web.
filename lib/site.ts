@@ -67,8 +67,8 @@ export const nav = [
  * entregue el perfil real. WhatsApp usa el enlace de conversación del sitio.
  */
 export const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com", label: "Facebook de Fundición Fuentes" },
-  { name: "Instagram", href: "https://instagram.com", label: "Instagram de Fundición Fuentes" },
+  { name: "Facebook", href: "https://www.facebook.com/profile.php?id=100063478004802", label: "Facebook de Fundición Fuentes" },
+  { name: "Instagram", href: "https://www.instagram.com/fundicion_fuentes/", label: "Instagram de Fundición Fuentes" },
   { name: "WhatsApp", href: "https://wa.me/", label: "WhatsApp de Fundición Fuentes" },
   { name: "YouTube", href: "https://youtube.com", label: "YouTube de Fundición Fuentes" },
   { name: "TikTok", href: "https://tiktok.com", label: "TikTok de Fundición Fuentes" },
@@ -238,4 +238,5 @@ export const generalWhatsappMessage =
  * Video del taller (mp4, webm, YouTube o Vimeo).
  * Vacío hasta que lo entreguen. Se puede definir con NEXT_PUBLIC_WORKSHOP_VIDEO.
  */
-export const workshopVideoSrc = process.env.NEXT_PUBLIC_WORKSHOP_VIDEO ?? "";
+export const workshopVideoSrc = "/images/FundicionPieza.mp4";
+export const nosotrosVideoSrc = "/images/ElaboracionPieza.mp4";
