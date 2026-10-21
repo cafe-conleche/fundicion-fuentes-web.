@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <DemoBanner />
         <SiteHeader />
-        <main id="contenido" className="flex flex-1 flex-col pb-20">
+        <main id="contenido" className="flex flex-1 flex-col">
           {children}
         </main>
         <SiteFooter />

@@ -88,7 +88,7 @@ Misma cabecera, franja no hace falta, footer idéntico.
 - `/nosotros`: apertura navy con el mismo `WorkshopFilm`. Debajo, tres bloques alineados (número + título a la izquierda, contenido a la derecha): oficio, cómo encargar, servicios. Sin índice «En esta página».
 - `/productos`: pastillas de categoría y, dentro de cada una, filas horizontales (imagen a la izquierda, nombre, texto y botones a la derecha). La ficha sigue con imagen protagonista y CTA de WhatsApp. Sin precios.
 - `/servicios`: filas imagen + texto, alternando lado.
-- `/contacto`: datos grandes (los del footer) y formulario o bloque de WhatsApp al lado.
+- `/contacto`: banda navy, datos grandes (número, horario, dirección), mapa de la ciudad conocida y formulario que abre el correo (`quoteEmail`). WhatsApp queda como alternativa. No inventar calle ni horario.
 
 ## Al implementar
 

@@ -62,7 +62,7 @@ export function SiteHeader() {
             <BrandMark className="h-14 w-14 shrink-0" />
             <span className="leading-tight">
               <span
-                className={`block font-display text-lg font-bold uppercase tracking-[0.12em] sm:text-xl ${
+                className={`block font-display text-[0.8rem] font-bold uppercase leading-none tracking-normal min-[400px]:text-lg min-[400px]:tracking-[0.08em] sm:text-xl sm:tracking-[0.12em] ${
                   overSlider ? "text-white" : "text-navy"
                 }`}
               >

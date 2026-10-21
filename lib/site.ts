@@ -11,6 +11,9 @@ export const site = {
 /** Vacío hasta que el taller confirme el número oficial. */
 export const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "";
 
+/** Vacío hasta que el taller confirme el correo de cotizaciones. */
+export const quoteEmail = process.env.NEXT_PUBLIC_QUOTE_EMAIL ?? "";
+
 export type ContactFact = {
   id: "ubicacion" | "whatsapp" | "horario" | "direccion";
   label: string;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { whatsappHref } from "@/lib/site";
+import { quoteEmail } from "@/lib/site";
 
 export function QuoteForm() {
   const [sent, setSent] = useState(false);
@@ -20,7 +20,12 @@ export function QuoteForm() {
       `Pieza o trabajo: ${piece}`,
       `Detalle: ${detail}`,
     ].join("\n");
-    window.open(whatsappHref(message), "_blank", "noopener,noreferrer");
+    const subject = encodeURIComponent(`Cotización · ${name}`);
+    const body = encodeURIComponent(message);
+    const href = quoteEmail
+      ? `mailto:${quoteEmail}?subject=${subject}&body=${body}`
+      : `mailto:?subject=${subject}&body=${body}`;
+    window.location.href = href;
     setSent(true);
   }
 
@@ -63,11 +68,13 @@ export function QuoteForm() {
         />
       </label>
       <button type="submit" className="btn btn-primary w-full">
-        Enviar cotización por WhatsApp
+        Enviar cotización por correo
       </button>
       {sent ? (
         <p className="text-sm leading-6 text-steel" role="status">
-          Se abrió WhatsApp con su mensaje. El sitio no guarda la cotización: hay que enviarla en la aplicación.
+          {quoteEmail
+            ? "Se abrió su correo con el mensaje dirigido al taller. Envíelo desde allí. El sitio no guarda la cotización."
+            : "Se abrió su correo con el mensaje listo. El correo oficial del taller está pendiente: elija el destinatario al enviar. El sitio no guarda la cotización."}
         </p>
       ) : null}
     </form>

@@ -40,7 +40,7 @@ export default async function ProductoPage({
   const whatsappMessage = productWhatsappMessage(product.name);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-10 pb-28 sm:px-6 md:py-14 lg:pb-14">
+    <div className="mx-auto w-full max-w-6xl px-4 py-10 pb-40 sm:px-6 md:py-14 lg:pb-14">
       <p className="text-sm text-steel">
         <Link href="/productos" className="text-blue hover:text-navy">
           Productos
@@ -93,7 +93,7 @@ export default async function ProductoPage({
       </div>
 
       <div
-        className="fixed inset-x-0 bottom-20 z-30 border-t border-mist bg-white/95 p-4 backdrop-blur-sm lg:hidden"
+        className="fixed inset-x-0 bottom-24 z-30 border-t border-mist bg-white/95 p-4 backdrop-blur-sm lg:hidden"
         role="region"
         aria-label="Consulta rápida"
       >

@@ -65,7 +65,7 @@ export function HeroSlider() {
 
   return (
     <section
-      className="hero-slider relative -mt-[4.5rem] h-[78vh] text-white md:h-[min(88vh,760px)]"
+      className="hero-slider relative -mt-[4.5rem] h-[78vh] min-h-[44rem] text-white md:h-[min(88vh,760px)] md:min-h-0"
       aria-roledescription="carrusel"
       aria-label="Presentación de Fundición Fuentes"
       tabIndex={0}
@@ -102,21 +102,21 @@ export function HeroSlider() {
             />
             <div className="absolute inset-0 hero-overlay" aria-hidden="true" />
             <div className="absolute inset-0 flex items-end">
-              <div className="mx-auto w-full max-w-6xl px-14 pb-28 pt-28 sm:px-16">
+              <div className="mx-auto w-full max-w-6xl px-12 pb-16 pt-24 sm:px-14 md:px-16 md:pb-28 md:pt-28">
                 <p className="eyebrow text-blue-light">{slide.eyebrow}</p>
                 {active ? (
-                  <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-6xl">
+                  <h1 className="mt-4 max-w-3xl font-display text-3xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
                     {slide.title}
                   </h1>
                 ) : (
-                  <p className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.05] sm:text-6xl">
+                  <p className="mt-4 max-w-3xl font-display text-3xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
                     {slide.title}
                   </p>
                 )}
                 <p className="mt-4 max-w-xl text-base leading-7 text-white sm:text-lg">
                   {slide.text}
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <div className="mt-8 flex flex-col gap-3 md:flex-row">
                   <Link
                     href={slide.primaryHref}
                     className="btn bg-white text-navy hover:bg-blue-light"

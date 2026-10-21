@@ -7,7 +7,7 @@ export function SiteFooter() {
   const facts = contactFacts().filter((fact) => fact.id !== "whatsapp");
 
   return (
-    <footer className="mt-auto bg-navy text-white">
+    <footer className="mt-auto border-t border-white/10 bg-navy-darker text-white">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 md:py-12">
         <div>
           <p className="font-display text-2xl font-bold uppercase tracking-[0.12em]">
@@ -63,7 +63,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="bg-navy-darker px-4 py-4 pb-24 text-sm text-blue-light sm:px-6 md:pb-4">
+      <div className="border-t border-white/10 px-4 py-4 pb-24 text-sm text-blue-light sm:px-6 md:pb-4">
         <p className="mx-auto max-w-6xl">
           © <CopyrightYear /> {site.name}. {site.location}.
         </p>

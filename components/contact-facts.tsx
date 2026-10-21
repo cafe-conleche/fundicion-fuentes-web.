@@ -19,7 +19,7 @@ export function ContactFacts({
 
 function Fact({ fact, onDark }: { fact: ContactFact; onDark: boolean }) {
   return (
-    <div>
+    <div className="min-w-0">
       <dt
         className={`text-xs font-semibold uppercase tracking-[0.16em] ${
           onDark ? "text-blue-light" : "text-steel"

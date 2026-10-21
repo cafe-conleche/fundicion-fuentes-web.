@@ -125,28 +125,30 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-4 pb-10 sm:px-6 md:pb-14">
-        <div className="mx-auto grid max-w-6xl overflow-hidden rounded-2xl bg-navy text-white shadow-xl md:grid-cols-2">
-          <div className="p-8 sm:p-10">
+      <section className="grid text-white md:grid-cols-2">
+        <div className="bg-navy">
+          <div className="ml-auto w-full max-w-3xl px-4 py-12 sm:px-6 md:py-16 md:pr-12">
             <p className="eyebrow text-blue-light">Cotización</p>
             <h2 className="mt-3 font-display text-4xl font-bold leading-tight sm:text-5xl">
               Cuéntenos la pieza que necesita
             </h2>
             <p className="mt-4 max-w-md text-base leading-7 text-blue-light">
-              Nombre, teléfono y el trabajo. El formulario arma el mensaje y lo abre en WhatsApp.
+              Nombre, teléfono y el trabajo. El formulario arma el mensaje y lo abre en su correo.
             </p>
             <Link href="/contacto#cotizacion" className="btn mt-6 bg-white text-navy hover:bg-blue-light">
               Llenar el formulario
             </Link>
           </div>
-          <div className="flex flex-col justify-center bg-navy-deep p-8 sm:p-10">
+        </div>
+        <div className="flex flex-col justify-center bg-navy-deep">
+          <div className="mr-auto w-full max-w-3xl px-4 py-12 sm:px-6 md:py-16 md:pl-12">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-light">
               Línea directa
             </p>
             <p className="mt-2 font-display text-4xl font-bold">
               {whatsappNumber.trim() ? whatsappNumber : "WhatsApp pendiente"}
             </p>
-            <p className="mt-3 text-sm leading-6 text-blue-light">
+            <p className="mt-3 max-w-md text-sm leading-6 text-blue-light">
               Si prefiere no llenar el formulario, abra la conversación directo.
             </p>
             <WhatsappLink message={generalWhatsappMessage} variant="green" className="mt-6 w-fit px-6 py-3">
