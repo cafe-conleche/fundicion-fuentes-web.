@@ -1,4 +1,5 @@
 ﻿import Link from "next/link";
+import Image from "next/image"; // <-- 1. Importamos Image
 import { MediaSlot } from "@/components/media-slot";
 import { WhatsappLink } from "@/components/whatsapp-link";
 import {
@@ -30,14 +31,30 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           isFeatured ? "lg:w-[55%] shrink-0" : ""
         } ${isRow ? "md:w-[42%] md:max-w-xs shrink-0" : ""}`}
       >
-        <MediaSlot
-          variant={isRow ? "catalog" : "product"}
-          label={product.name}
-          quiet={isRow}
-          className={`transition-transform duration-300 hover:scale-105 ${
-            isFeatured ? "lg:min-h-full lg:aspect-auto lg:h-full" : ""
-          } ${isRow ? "md:h-full" : ""}`}
-        />
+        {/* 2. AQUÍ ESTÁ LA MAGIA: Si hay imagen, la muestra. Si no, muestra el cuadro azul */}
+        {product.imageSrc ? (
+          <div
+            className={`relative w-full overflow-hidden bg-paper ${
+              isFeatured ? "lg:min-h-full lg:aspect-auto lg:h-full" : "aspect-square"
+            } ${isRow ? "md:h-full" : ""}`}
+          >
+            <Image
+              src={product.imageSrc}
+              alt={product.imageAlt || product.name}
+              fill
+              className="object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+        ) : (
+          <MediaSlot
+            variant={isRow ? "catalog" : "product"}
+            label={product.name}
+            quiet={isRow}
+            className={`transition-transform duration-300 hover:scale-105 ${
+              isFeatured ? "lg:min-h-full lg:aspect-auto lg:h-full" : ""
+            } ${isRow ? "md:h-full" : ""}`}
+          />
+        )}
       </Link>
       <div
         className={`flex flex-1 flex-col gap-3 ${

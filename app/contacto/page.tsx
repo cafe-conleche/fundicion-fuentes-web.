@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ContactFacts } from "@/components/contact-facts";
-import { MediaSlot } from "@/components/media-slot";
 import { QuoteForm } from "@/components/quote-form";
 import { WhatsappLink } from "@/components/whatsapp-link";
 import { generalWhatsappMessage, site } from "@/lib/site";
@@ -10,8 +10,9 @@ export const metadata: Metadata = {
   description: `Contacto y cotización de ${site.name} en ${site.location}.`,
 };
 
+// CAMBIO: Buscamos el nombre del taller en Google Maps en lugar de solo "Masaya"
 const mapSrc =
-  "https://maps.google.com/maps?q=Masaya%2C%20Nicaragua&z=13&hl=es&output=embed";
+  "https://maps.google.com/maps?q=Fundicion+Fuentes+Masaya&z=16&hl=es&output=embed";
 
 export default function ContactoPage() {
   return (
@@ -40,14 +41,19 @@ export default function ContactoPage() {
         <div>
           <h2 className="font-display text-3xl font-semibold text-navy">Dónde está el taller</h2>
           <p className="mt-3 max-w-xl text-sm leading-6 text-steel">
-            Primero la fachada, cuando el taller entregue la foto. El mapa ubica{" "}
-            {site.location}. La calle exacta se publicará cuando la confirmen.
+            El mapa ubica {site.location}. Nuestra dirección exacta es Km 30.8 Masaya-Granada, Masaya.
           </p>
-          <MediaSlot
-            variant="banner"
-            label="Fachada del taller, vista desde la calle"
-            className="mt-6 rounded-2xl"
-          />
+          
+          <div className="relative mt-6 aspect-video w-full overflow-hidden rounded-2xl shadow-md">
+            <Image
+              src="/images/FOTOempresa.jpeg"
+              alt="Fachada del taller de Fundición Fuentes"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+
           <figure className="mt-6 overflow-hidden rounded-2xl border border-mist bg-paper shadow-md">
             <iframe
               title={`Mapa de ${site.location}`}
@@ -57,9 +63,21 @@ export default function ContactoPage() {
               referrerPolicy="no-referrer-when-downgrade"
             />
             <figcaption className="px-4 py-3 text-sm text-steel">
-              {site.location}. Dirección exacta: pendiente.
+              {site.location}. Dirección: Km 30.8 Masaya-Granada, Masaya.
             </figcaption>
           </figure>
+
+          {/* CAMBIO: Botón para abrir Waze */}
+          <div className="mt-4 flex justify-center">
+            <a
+              href="https://waze.com/ul?q=Fundicion+Fuentes+Masaya&navigate=yes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md transition-colors hover:bg-blue-700"
+            >
+              Abrir en Waze
+            </a>
+          </div>
         </div>
 
         <div id="cotizacion" className="scroll-mt-28 rounded-2xl border border-mist bg-white p-6 shadow-md sm:p-8">

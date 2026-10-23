@@ -122,6 +122,7 @@ export default function Home() {
                 name={service.name}
                 description={service.description}
                 whatsappMessage={serviceWhatsappMessage(service.name)}
+                imageSrc={(service as any).imageSrc} // <-- LÍNEA AGREGADA AQUÍ
                 reverse={index % 2 === 1}
               />
             ))}

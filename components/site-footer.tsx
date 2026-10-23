@@ -37,14 +37,21 @@ export function SiteFooter() {
             Contacto
           </p>
           <ul className="mt-4 space-y-2.5 text-base">
-            {facts.map((fact) => (
-              <li key={fact.id}>
-                <span className="block text-xs uppercase tracking-[0.14em] text-blue-light">
-                  {fact.label}
-                </span>
-                <span className="text-white">{fact.value}</span>
-              </li>
-            ))}
+            {facts.map((fact) => {
+              // LÓGICA: Si es el horario, usamos una versión más corta para el footer
+              const displayValue = fact.id === "horario" 
+                ? "Lun-Vie: 8:00 AM - 5:00 PM\nSáb: 8:00 AM - 2:00 PM" 
+                : fact.value;
+
+              return (
+                <li key={fact.id}>
+                  <span className="block text-xs uppercase tracking-[0.14em] text-blue-light">
+                    {fact.label}
+                  </span>
+                  <span className="text-white whitespace-pre-line">{displayValue}</span>
+                </li>
+              );
+            })}
             <li>
               <Link href="/contacto#cotizacion" className="font-semibold text-white hover:text-blue-light">
                 Formulario de cotización

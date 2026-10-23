@@ -22,7 +22,7 @@ export type ContactFact = {
   emphasis?: boolean;
 };
 
-/** Solo datos presentes en el sitio. Horario y dirección aún no están confirmados. */
+/** Solo datos presentes en el sitio. Horario y dirección ya confirmados. */
 export function contactFacts(): ContactFact[] {
   const hasWhatsapp = whatsappNumber.trim().length > 0;
   return [
@@ -42,14 +42,15 @@ export function contactFacts(): ContactFact[] {
     {
       id: "horario",
       label: "Horario",
-      value: "Pendiente",
-      pending: true,
+      // CAMBIO: Días completos y minutos incluidos para un look más profesional
+      value: "Lunes a Viernes: 8:00 AM - 5:00 PM\nSábado: 8:00 AM - 2:00 PM", 
+      pending: false,
     },
     {
       id: "direccion",
       label: "Dirección",
-      value: "Pendiente",
-      pending: true,
+      value: "Km 30.8 Masaya-Granada, Masaya",
+      pending: false,
     },
   ];
 }
@@ -101,99 +102,95 @@ export const categories = [
 
 export type CategorySlug = (typeof categories)[number]["slug"];
 
+// AQUÍ ESTÁN TUS PRODUCTOS REALES CON SUS FOTOS
 export const products = [
   {
-    slug: "carcasa-industrial-demo",
-    name: "Carcasa industrial",
+    slug: "engranaje-32",
+    name: "Engranaje de 32” con piñón de ataque",
     category: "piezas-industriales" as CategorySlug,
-    description:
-      "Registro de demostración para el catálogo. Nombre, categoría y foto oficiales se sustituirán con material validado por el taller.",
-    imageAlt: "Marcador visual de catálogo para carcasa industrial. Fotografía oficial pendiente.",
+    description: "Fundición y mecanizado de engranajes de gran tamaño en hierro gris para transmisión de fuerza en maquinaria pesada.",
+    imageSrc: "/images/Engranaje32.jpeg",
+    imageAlt: "Engranaje de 32 pulgadas con piñón de ataque",
   },
   {
-    slug: "base-de-maquina-demo",
-    name: "Base de máquina",
+    slug: "juego-helicoidales-bomba-aceite",
+    name: "Juego de helicoidales pequeños para bomba de aceite",
     category: "piezas-industriales" as CategorySlug,
-    description:
-      "Pieza de ejemplo para organizar el listado. No se publican materiales, dimensiones ni disponibilidad.",
-    imageAlt: "Marcador visual de catálogo para base de máquina. Fotografía oficial pendiente.",
+    description: "Fundición y mecanizado de juego de helicoidales. A la izquierda se muestra la pieza desgastada original y a la derecha las piezas nuevas fabricadas a medida.",
+    imageSrc: "/images/rotorEngranaje.jpeg",
+    imageAlt: "Juego de helicoidales para bomba de aceite, pieza desgastada y piezas nuevas",
   },
   {
-    slug: "componente-metalmecanico-demo",
-    name: "Componente metalmecánico",
+    slug: "campana-media-transporte",
+    name: "Campana a media para transporte pesado y liviano",
     category: "metalmecanica" as CategorySlug,
-    description:
-      "Ficha de demostración. La descripción comercial definitiva la definirá Fundición Fuentes.",
-    imageAlt: "Marcador visual de catálogo para componente metalmecánico. Fotografía oficial pendiente.",
+    description: "Fabricación de campanas de freno en hierro fundido para vehículos de transporte. Piezas resistentes y mecanizadas a la medida.",
+    imageSrc: "/images/CAMPANA.jpg",
+    imageAlt: "Campana de freno para transporte pesado y liviano",
   },
+  // ... el resto de productos de demostración (puedes dejarlos o borrarlos)
   {
     slug: "pieza-de-repuesto-demo",
     name: "Pieza de repuesto",
     category: "metalmecanica" as CategorySlug,
-    description:
-      "Ejemplo de producto desactivable desde el futuro panel. Hoy solo ilustra la navegación del catálogo.",
+    description: "Ejemplo de producto desactivable desde el futuro panel. Hoy solo ilustra la navegación del catálogo.",
     imageAlt: "Marcador visual de catálogo para pieza de repuesto. Fotografía oficial pendiente.",
   },
   {
     slug: "tapa-urbana-demo",
     name: "Tapa urbana",
     category: "alcantarillado-urbano" as CategorySlug,
-    description:
-      "Categoría urbana de demostración. No se afirma peso, norma ni medida hasta contar con datos del taller.",
+    description: "Categoría urbana de demostración. No se afirma peso, norma ni medida hasta contar con datos del taller.",
     imageAlt: "Marcador visual de catálogo para tapa urbana. Fotografía oficial pendiente.",
   },
   {
     slug: "rejilla-de-piso-demo",
     name: "Rejilla de piso",
     category: "alcantarillado-urbano" as CategorySlug,
-    description:
-      "Producto de ejemplo para el muestrario. La fotografía real se cargará cuando exista archivo autorizado.",
+    description: "Producto de ejemplo para el muestrario. La fotografía real se cargará cuando exista archivo autorizado.",
     imageAlt: "Marcador visual de catálogo para rejilla de piso. Fotografía oficial pendiente.",
   },
   {
     slug: "pieza-segun-plano-demo",
     name: "Pieza según plano",
     category: "piezas-a-medida" as CategorySlug,
-    description:
-      "Representa trabajos a partir de un requerimiento del cliente. La cotización se hace por WhatsApp.",
+    description: "Representa trabajos a partir de un requerimiento del cliente. La cotización se hace por WhatsApp.",
     imageAlt: "Marcador visual de catálogo para pieza según plano. Fotografía oficial pendiente.",
   },
   {
     slug: "recuperacion-de-pieza-demo",
     name: "Recuperación de pieza",
     category: "piezas-a-medida" as CategorySlug,
-    description:
-      "Ejemplo de servicio-producto a medida. Sin plazos ni precios hasta que el taller los confirme.",
+    description: "Ejemplo de servicio-producto a medida. Sin plazos ni precios hasta que el taller los confirme.",
     imageAlt: "Marcador visual de catálogo para recuperación de pieza. Fotografía oficial pendiente.",
   },
 ] as const;
 
 export type Product = (typeof products)[number];
 
+// AQUÍ ESTÁN LOS SERVICIOS CON SUS FOTOS
 export const services = [
   {
     slug: "fundicion-de-metales",
     name: "Fundición de metales",
-    description:
-      "Servicio de fundición del taller. Los metales y procesos exactos se publicarán cuando el cliente los autorice. Esta ficha no lista aleaciones.",
+    description: "Servicio de fundición del taller. Los metales y procesos exactos se publicarán cuando el cliente los autorice. Esta ficha no lista aleaciones.",
+    imageSrc: "/images/FundicionMetales.png", // <-- Foto de fundición
   },
   {
     slug: "moldeado-personalizado",
     name: "Moldeado personalizado",
-    description:
-      "Preparación de moldes según el trabajo solicitado. Alcance y condiciones se confirman en cada consulta.",
+    description: "Preparación de moldes según el trabajo solicitado. Alcance y condiciones se confirman en cada consulta.",
+    imageSrc: "/images/MoldeadoPerson.png", // <-- Foto de moldeado
   },
   {
     slug: "maquinado",
     name: "Maquinado",
-    description:
-      "Acabado y ajuste de piezas cuando el trabajo lo requiera. Detalle técnico pendiente de validación.",
+    description: "Acabado y ajuste de piezas cuando el trabajo lo requiera. Detalle técnico pendiente de validación.",
   },
   {
     slug: "mantenimiento",
     name: "Mantenimiento",
-    description:
-      "Apoyo de mantenimiento asociado a piezas y trabajos del taller. Condiciones por confirmar con Fundición Fuentes.",
+    description: "Apoyo de mantenimiento asociado a piezas y trabajos del taller. Condiciones por confirmar con Fundición Fuentes.",
   },
 ] as const;
 

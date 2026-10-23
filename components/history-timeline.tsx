@@ -5,40 +5,40 @@ import { useState } from "react";
 
 const chapters = [
   {
-    id: "inicio",
-    label: "Inicio",
-    kicker: "El lugar",
+    id: "comienzo",
+    label: "El comienzo",
+    kicker: "Los primeros años",
     title: "El inicio del taller",
-    text: "El taller está en Masaya. Aquí empieza cada pieza: el espacio, el horno y el metal por fundir.",
+    text: "El taller está en Masaya. Aquí empieza cada pieza: el espacio, el horno y el metal por fundir. Los primeros años de trabajo, fundiendo metal con esfuerzo y dedicación.",
     image: "/images/InicioTaller.jpg",
-    alt: "Interior del taller de Fundición Fuentes.",
+    alt: "Fundadores del taller con una pieza fundida.",
   },
   {
-    id: "fundacion",
-    label: "Fundación",
-    kicker: "La fundación",
+    id: "fundicion",
+    label: "La fundición",
+    kicker: "El oficio",
     title: "Un oficio que se sostiene",
-    text: "La historia del taller es fundir metal y entregar la pieza a quien la necesita. Ese gesto es la fundación de la casa.",
-    image: "/images/Fundicion.jpeg",
+    text: "La historia del taller es fundir metal y entregar la pieza a quien la necesita. Ese gesto es la base de nuestra casa.",
+    image: "/images/InicioTaller3.jpg",
     alt: "Colada en el taller de Fundición Fuentes.",
   },
   {
-    id: "anos",
-    label: "Los años",
+    id: "evolucion",
+    label: "La evolución",
     kicker: "El paso de los años",
     title: "El trabajo se queda en el taller",
-    text: "Con el tiempo el torno acompaña a la pieza fundida. El año de apertura y quién lo inició se publican cuando el taller cuente esa trayectoria.",
-    image: "/images/PinachoMaquina.jpeg",
-    alt: "Torno del taller.",
+    text: "Con el tiempo el torno acompaña a la pieza fundida. Creciendo junto a nuestros clientes, perfeccionando el oficio y ampliando el taller.",
+    image: "/images/PinachoMaquina.jpeg", // <-- CAMBIO AQUÍ: Usamos la foto del torno
+    alt: "Torno del taller de Fundición Fuentes.",
   },
   {
-    id: "hoy",
-    label: "Hoy",
+    id: "presente",
+    label: "El presente",
     kicker: "Hoy",
     title: "Quienes siguen el metal",
-    text: "El equipo que está en el taller ahora. La pieza sigue saliendo de Masaya, como al inicio.",
-    image: "/images/EmpleadosTodos2.jpeg",
-    alt: "Equipo del taller de Fundición Fuentes.",
+    text: "El equipo que está en el taller ahora. Un equipo consolidado, con la misma pasión por el metal y el trabajo bien hecho. La pieza sigue saliendo de Masaya, como al inicio.",
+    image: "/images/FOTO_ACTUAL.jpg",
+    alt: "Equipo actual del taller de Fundición Fuentes.",
   },
 ] as const;
 
@@ -181,7 +181,8 @@ export function HistoryTimeline() {
 function ChapterView({ chapter }: { chapter: (typeof chapters)[number] }) {
   return (
     <>
-      <div className="relative aspect-[16/10] overflow-hidden rounded-lg lg:col-span-7">
+      {/* CAMBIO CLAVE: aspect-[4/3] en lugar de aspect-[16/10] para que las fotos verticales no se recorten tanto */}
+      <div className="relative aspect-[4/3] overflow-hidden rounded-lg lg:col-span-7">
         <Image
           src={chapter.image}
           alt={chapter.alt}
