@@ -166,7 +166,15 @@ export const products = [
   },
 ] as const;
 
-export type Product = (typeof products)[number];
+// CAMBIO: Definimos el tipo Product manualmente para que imageSrc e imageAlt sean opcionales
+export type Product = {
+  slug: string;
+  name: string;
+  category: CategorySlug;
+  description: string;
+  imageSrc?: string;
+  imageAlt: string;
+};
 
 // AQUÍ ESTÁN LOS SERVICIOS CON SUS FOTOS
 export const services = [
