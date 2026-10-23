@@ -90,7 +90,7 @@ export function SiteHeader() {
               );
             })}
             <Link href="/contacto" className="btn btn-primary ml-3 px-5 py-2 text-sm">
-              Contactar
+              Cotizar
             </Link>
           </nav>
 
@@ -142,7 +142,7 @@ export function SiteHeader() {
               );
             })}
             <Link href="/contacto" className="btn btn-primary mt-3 w-full" onClick={() => setOpen(false)}>
-              Contactar
+              Cotizar
             </Link>
           </nav>
         ) : null}

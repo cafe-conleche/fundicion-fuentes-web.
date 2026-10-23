@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { MediaSlot } from "@/components/media-slot";
 import { WhatsappLink } from "@/components/whatsapp-link";
 import { generalWhatsappMessage, site } from "@/lib/site";
 
@@ -64,32 +63,25 @@ const slides = [
   },
 ] as const;
 
+const slideDurationMs = 7000;
+
 export function HeroSlider() {
-  const [index, setIndex] = useState(0);
-  const [hovering, setHovering] = useState(false);
-  const [focusWithin, setFocusWithin] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const paused = hovering || focusWithin;
+  const [{ index, previous }, setSlide] = useState({ index: 0, previous: 0 });
 
   const go = useCallback((next: number) => {
-    setIndex((next + slides.length) % slides.length);
+    setSlide((current) => {
+      const normalized = (next + slides.length) % slides.length;
+      if (normalized === current.index) return current;
+      return { index: normalized, previous: current.index };
+    });
   }, []);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => setReduceMotion(media.matches);
-    apply();
-    media.addEventListener("change", apply);
-    return () => media.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    if (reduceMotion || paused) return;
-    const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % slides.length);
-    }, 5000); // <-- CAMBIADO A 5 SEGUNDOS (5000 ms) para que se vean bien las fotos
-    return () => window.clearInterval(timer);
-  }, [paused, reduceMotion]);
+    const timer = window.setTimeout(() => {
+      go(index + 1);
+    }, slideDurationMs);
+    return () => window.clearTimeout(timer);
+  }, [go, index]);
 
   return (
     <section
@@ -97,12 +89,6 @@ export function HeroSlider() {
       aria-roledescription="carrusel"
       aria-label="Presentación de Fundición Fuentes"
       tabIndex={0}
-      onMouseEnter={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-      onFocus={() => setFocusWithin(true)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocusWithin(false);
-      }}
       onKeyDown={(event) => {
         if (event.key === "ArrowRight") {
           event.preventDefault();
@@ -116,24 +102,24 @@ export function HeroSlider() {
     >
       {slides.map((slide, slideIndex) => {
         const active = slideIndex === index;
+        const leaving = slideIndex === previous && !active;
         return (
           <div
             key={slide.id}
-            className={`absolute inset-0 ${active ? "z-10 opacity-100" : "pointer-events-none z-0 opacity-0"} ${reduceMotion ? "" : "transition-opacity duration-700"}`}
+            className={`hero-slide${active ? " is-active" : ""}${leaving ? " is-leaving" : ""}`}
             aria-hidden={!active}
             inert={!active}
           >
-            {/* RENDERIZADO DE LA IMAGEN */}
             <Image
               src={slide.image}
               alt={slide.title}
               fill
-              className="object-cover"
-              priority={slideIndex === 0} // Solo la primera carga rápido
+              className="hero-photo object-cover"
+              priority={slideIndex === 0}
             />
-            
+
             <div className="absolute inset-0 hero-overlay" aria-hidden="true" />
-            <div className="absolute inset-0 flex items-end">
+            <div className="hero-copy absolute inset-0 flex items-end">
               <div className="mx-auto w-full max-w-6xl px-12 pb-16 pt-24 sm:px-14 md:px-16 md:pb-28 md:pt-28">
                 <p className="eyebrow text-blue-light">{slide.eyebrow}</p>
                 {active ? (
@@ -164,6 +150,8 @@ export function HeroSlider() {
           </div>
         );
       })}
+
+      <div className="slider-progress" key={index} aria-hidden="true" />
 
       <div className="absolute bottom-14 left-0 right-0 z-20 flex justify-center gap-2">
         {slides.map((slide, slideIndex) => (
