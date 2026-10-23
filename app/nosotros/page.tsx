@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HistoryTimeline } from "@/components/history-timeline";
 import { WorkshopFilm } from "@/components/workshop-film";
 // CAMBIO 1: Importamos el nuevo video
 import { services, site, nosotrosVideoSrc } from "@/lib/site";
@@ -40,8 +41,8 @@ export default function NosotrosPage() {
         >
           Masaya
         </p>
-        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-12 lg:items-start">
-          <div className="min-w-0 lg:col-span-5 lg:pt-4">
+        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:py-16 lg:max-w-7xl lg:grid-cols-12 lg:items-start lg:gap-x-10">
+          <div className="min-w-0 lg:col-span-5 lg:pt-4 lg:pr-4">
             <p className="eyebrow text-blue-light">Nosotros</p>
             <h1 className="mt-4 font-display text-5xl font-bold leading-[0.92] sm:text-6xl">
               {site.name}
@@ -50,20 +51,16 @@ export default function NosotrosPage() {
               Taller de fundición en {site.location}. Piezas y servicios para
               trabajo industrial, con un interlocutor local.
             </p>
-            <p className="mt-5 max-w-md text-base leading-7 text-white/80">
-              La historia del taller es la de un oficio en Masaya: fundir metal y
-              entregar piezas a quien las necesita. Los años, quién lo inició y
-              cómo creció se publicarán con el relato del propio taller. Esta
-              página no inventa esa trayectoria.
-            </p>
           </div>
           <WorkshopFilm
             src={nosotrosVideoSrc} // CAMBIO 2: Usamos el video de elaboración
             label="Video institucional: instalaciones, equipo o una colada"
-            className="min-w-0 lg:col-span-7 [&_figcaption]:text-blue-light/80"
+            className="min-w-0 lg:col-span-6 lg:col-start-7 [&_figcaption]:text-blue-light/80"
           />
         </div>
       </section>
+
+      <HistoryTimeline />
 
       <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 md:py-16">
         <section className="grid gap-6 border-b border-mist pb-12 lg:grid-cols-12 lg:gap-12">
