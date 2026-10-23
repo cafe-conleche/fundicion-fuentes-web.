@@ -5,20 +5,13 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SocialLinks } from "@/components/social-links";
-import {
-  contactFacts,
-  generalWhatsappMessage,
-  nav,
-  site,
-  whatsappHref,
-} from "@/lib/site";
+import { nav, site } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const overSlider = pathname === "/" && !scrolled && !open;
-  const whatsapp = contactFacts().find((fact) => fact.id === "whatsapp");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -34,19 +27,8 @@ export function SiteHeader() {
   return (
     <div className="sticky top-0 z-40">
       <div className="top-bar hidden h-11 md:block">
-        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6">
-          <p className="text-sm font-medium text-white">{site.location}</p>
-          <div className="flex items-center gap-3">
-            <SocialLinks variant="utility" />
-            <a
-              href={whatsappHref(generalWhatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-white hover:text-blue-light"
-            >
-              {whatsapp?.pending ? "WhatsApp" : whatsapp?.value}
-            </a>
-          </div>
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-end px-4 sm:px-6">
+          <SocialLinks variant="utility" />
         </div>
       </div>
 
@@ -143,14 +125,6 @@ export function SiteHeader() {
               </div>
               <SocialLinks variant="menu" />
             </div>
-            <a
-              href={whatsappHref(generalWhatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mb-3 block font-display text-3xl font-bold text-blue"
-            >
-              {whatsapp?.pending ? "WhatsApp pendiente" : whatsapp?.value}
-            </a>
             {nav.map((item) => {
               const current = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
               return (

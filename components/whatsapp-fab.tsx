@@ -6,7 +6,7 @@ export function WhatsappFab() {
       href={whatsappHref(generalWhatsappMessage)}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-5 bottom-5 z-50 inline-flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-whatsapp text-white shadow-[0_8px_22px_rgba(37,211,102,0.45)] transition-transform duration-200 hover:-translate-y-1.5 hover:scale-110"
+      className="fixed right-5 bottom-6 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_8px_22px_rgba(37,211,102,0.45)] transition-transform duration-200 hover:-translate-y-1.5 hover:scale-110"
       aria-label={
         whatsappNumber
           ? "Abrir WhatsApp con mensaje de cotización"

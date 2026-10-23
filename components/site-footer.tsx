@@ -65,7 +65,7 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10 px-4 py-4 pb-24 text-sm text-blue-light sm:px-6 md:pb-4">
         <p className="mx-auto max-w-6xl">
-          © <CopyrightYear /> {site.name}. {site.location}.
+          © <CopyrightYear /> {site.name}.
         </p>
       </div>
     </footer>

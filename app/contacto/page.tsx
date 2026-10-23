@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactFacts } from "@/components/contact-facts";
+import { MediaSlot } from "@/components/media-slot";
 import { QuoteForm } from "@/components/quote-form";
 import { WhatsappLink } from "@/components/whatsapp-link";
 import { generalWhatsappMessage, site } from "@/lib/site";
@@ -39,9 +40,14 @@ export default function ContactoPage() {
         <div>
           <h2 className="font-display text-3xl font-semibold text-navy">Dónde está el taller</h2>
           <p className="mt-3 max-w-xl text-sm leading-6 text-steel">
-            El mapa ubica {site.location}. La calle exacta se publicará cuando el
-            taller la confirme.
+            Primero la fachada, cuando el taller entregue la foto. El mapa ubica{" "}
+            {site.location}. La calle exacta se publicará cuando la confirmen.
           </p>
+          <MediaSlot
+            variant="banner"
+            label="Fachada del taller, vista desde la calle"
+            className="mt-6 rounded-2xl"
+          />
           <figure className="mt-6 overflow-hidden rounded-2xl border border-mist bg-paper shadow-md">
             <iframe
               title={`Mapa de ${site.location}`}

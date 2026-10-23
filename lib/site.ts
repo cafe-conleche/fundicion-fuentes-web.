@@ -70,9 +70,6 @@ export const socialLinks = [
   { name: "Facebook", href: "https://www.facebook.com/profile.php?id=100063478004802", label: "Facebook de Fundición Fuentes" },
   { name: "Instagram", href: "https://www.instagram.com/fundicion_fuentes/", label: "Instagram de Fundición Fuentes" },
   { name: "WhatsApp", href: "https://wa.me/", label: "WhatsApp de Fundición Fuentes" },
-  { name: "YouTube", href: "https://youtube.com", label: "YouTube de Fundición Fuentes" },
-  { name: "TikTok", href: "https://tiktok.com", label: "TikTok de Fundición Fuentes" },
-  { name: "X", href: "https://x.com", label: "X de Fundición Fuentes" },
 ] as const;
 
 export const categories = [

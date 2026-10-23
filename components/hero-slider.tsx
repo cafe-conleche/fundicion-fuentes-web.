@@ -165,25 +165,6 @@ export function HeroSlider() {
         );
       })}
 
-      <div className="absolute inset-y-0 left-0 right-0 z-20 flex items-center justify-between px-2 sm:px-4 pointer-events-none">
-        <button
-          type="button"
-          className="pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-navy shadow-md hover:bg-white"
-          aria-label="Diapositiva anterior"
-          onClick={() => go(index - 1)}
-        >
-          <span aria-hidden="true">‹</span>
-        </button>
-        <button
-          type="button"
-          className="pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-navy shadow-md hover:bg-white"
-          aria-label="Diapositiva siguiente"
-          onClick={() => go(index + 1)}
-        >
-          <span aria-hidden="true">›</span>
-        </button>
-      </div>
-
       <div className="absolute bottom-14 left-0 right-0 z-20 flex justify-center gap-2">
         {slides.map((slide, slideIndex) => (
           <button

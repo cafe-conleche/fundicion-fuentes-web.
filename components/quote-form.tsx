@@ -11,12 +11,14 @@ export function QuoteForm() {
     const data = new FormData(event.currentTarget);
     const name = String(data.get("nombre") ?? "").trim();
     const phone = String(data.get("telefono") ?? "").trim();
+    const email = String(data.get("correo") ?? "").trim();
     const piece = String(data.get("pieza") ?? "").trim();
     const detail = String(data.get("detalle") ?? "").trim();
     const message = [
       "Hola, deseo cotizar una pieza con Fundición Fuentes.",
       `Nombre: ${name}`,
       `Teléfono: ${phone}`,
+      `Correo: ${email}`,
       `Pieza o trabajo: ${piece}`,
       `Detalle: ${detail}`,
     ].join("\n");
@@ -47,6 +49,16 @@ export function QuoteForm() {
           type="tel"
           required
           autoComplete="tel"
+          className="mt-1 w-full rounded-lg border border-mist bg-paper px-3 py-2.5 text-base font-normal text-ink outline-none focus:border-blue"
+        />
+      </label>
+      <label className="block text-sm font-semibold text-navy">
+        Correo
+        <input
+          name="correo"
+          type="email"
+          required
+          autoComplete="email"
           className="mt-1 w-full rounded-lg border border-mist bg-paper px-3 py-2.5 text-base font-normal text-ink outline-none focus:border-blue"
         />
       </label>

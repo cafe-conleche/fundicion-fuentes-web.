@@ -18,7 +18,7 @@ const steps = [
   },
   {
     title: "Cuente qué necesita",
-    text: "En contacto deja su nombre, teléfono y el trabajo. El formulario arma el mensaje de WhatsApp.",
+    text: "En contacto deja su nombre, teléfono, correo y el trabajo. El formulario abre el mensaje en su correo.",
     href: "/contacto#cotizacion",
     action: "Ir al formulario",
   },
@@ -40,8 +40,8 @@ export default function NosotrosPage() {
         >
           Masaya
         </p>
-        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-12 lg:items-end">
-          <div className="min-w-0 lg:col-span-5">
+        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-12 lg:items-start">
+          <div className="min-w-0 lg:col-span-5 lg:pt-4">
             <p className="eyebrow text-blue-light">Nosotros</p>
             <h1 className="mt-4 font-display text-5xl font-bold leading-[0.92] sm:text-6xl">
               {site.name}
@@ -49,6 +49,12 @@ export default function NosotrosPage() {
             <p className="mt-5 max-w-md text-lg leading-8 text-blue-light">
               Taller de fundición en {site.location}. Piezas y servicios para
               trabajo industrial, con un interlocutor local.
+            </p>
+            <p className="mt-5 max-w-md text-base leading-7 text-white/80">
+              La historia del taller es la de un oficio en Masaya: fundir metal y
+              entregar piezas a quien las necesita. Los años, quién lo inició y
+              cómo creció se publicarán con el relato del propio taller. Esta
+              página no inventa esa trayectoria.
             </p>
           </div>
           <WorkshopFilm
